@@ -6,7 +6,7 @@ services:
     container_name: test_go_service
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@global_postgres:5432/${DB_NAME}?sslmode=disable
+      - DATABASE_URL=postgres://${DB_USER}:${DB_PASSWORD}@global_postgres:5432/${DB_NAME}?sslmode=disable&search_path=test_schema
     ports:
       - "8081:8080"
     networks:
