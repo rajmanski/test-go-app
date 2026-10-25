@@ -1,13 +1,11 @@
-FROM golang:1.26-alpine AS builder
+FROM golang:1.26-alpine
+
 WORKDIR /app
-COPY go.mod ./
-RUN go mod tidy
+
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+RUN go mod tidy
 
-FROM alpine:latest
-WORKDIR /root/
-COPY --from=builder /app/main .
 EXPOSE 8080
-CMD ["./main"]
+
+CMD ["go", "run", "main.go"]
